@@ -24,10 +24,10 @@ namespace Anagram
             var generatedLetters = "";
             for (int i = 0; i < 10; i++)
             {
-                var rndChar = (char)_rnd.Next('a', 'z');
-                generatedLetters += $",{rndChar}";
+                var rndChar = (char)_rnd.Next('A', 'Z');
+                generatedLetters += rndChar;
             }
-            tbChars.Text = generatedLetters.TrimStart(',');
+            tbChars.Text = generatedLetters;
         }
 
         private void formMain_Load(object sender, EventArgs e)
@@ -46,9 +46,9 @@ namespace Anagram
             var timeStart = DateTime.Now;
             var letterList = new List<char>();
             _matchedWords.Clear();
-            foreach (var letter in tbChars.Text.Split(',')) 
+            foreach (var letter in tbChars.Text.ToArray()) 
             {
-                letterList.Add(char.Parse(letter));
+                letterList.Add(letter);
             }
             foreach (var letter in letterList.ToArray())
             {
