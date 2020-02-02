@@ -35,6 +35,7 @@
             this.lblChars = new System.Windows.Forms.Label();
             this.btnGenerate = new System.Windows.Forms.Button();
             this.btnRandom = new System.Windows.Forms.Button();
+            this.lblTimeTaken = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,9 +45,9 @@
             this.lboxWords.FormattingEnabled = true;
             this.lboxWords.ItemHeight = 25;
             this.lboxWords.Location = new System.Drawing.Point(6, 158);
-            this.lboxWords.Margin = new System.Windows.Forms.Padding(2);
+            this.lboxWords.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lboxWords.Name = "lboxWords";
-            this.lboxWords.Size = new System.Drawing.Size(498, 354);
+            this.lboxWords.Size = new System.Drawing.Size(498, 329);
             this.lboxWords.TabIndex = 0;
             // 
             // pictureBox1
@@ -55,7 +56,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(509, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(509, 58);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -112,11 +113,22 @@
             this.btnRandom.UseVisualStyleBackColor = true;
             this.btnRandom.Click += new System.EventHandler(this.btnRandom_Click);
             // 
+            // lblTimeTaken
+            // 
+            this.lblTimeTaken.AutoSize = true;
+            this.lblTimeTaken.Location = new System.Drawing.Point(3, 489);
+            this.lblTimeTaken.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTimeTaken.Name = "lblTimeTaken";
+            this.lblTimeTaken.Size = new System.Drawing.Size(66, 13);
+            this.lblTimeTaken.TabIndex = 7;
+            this.lblTimeTaken.Text = "Time taken: ";
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(509, 517);
+            this.ClientSize = new System.Drawing.Size(509, 505);
+            this.Controls.Add(this.lblTimeTaken);
             this.Controls.Add(this.btnRandom);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.lblChars);
@@ -125,7 +137,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lboxWords);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "formMain";
@@ -147,6 +159,7 @@
         private System.Windows.Forms.Label lblChars;
         private System.Windows.Forms.Button btnGenerate;
         private System.Windows.Forms.Button btnRandom;
+        private System.Windows.Forms.Label lblTimeTaken;
     }
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Anagram
@@ -10,8 +11,7 @@ namespace Anagram
         Random _rnd = new Random();
         //dictionary loaded into memory
         List<string> _dictionary = new List<string>();
-        //list of characters
-        string charString;
+        List<string> _matchedWords = new List<string>();
 
         public formMain()
         {
@@ -43,75 +43,70 @@ namespace Anagram
 
         private void btnGenerate_Click(object sender, EventArgs e)
         {
-            charString = "";
-            var charCount = 0;
-            var _dictionaryF = new List<string>();
-            var charList = new List<char>();
-            //add the characters in textbox into list of characters
-            foreach (var letter in tbChars.Text.Split(','))
+            var timeStart = DateTime.Now;
+            var letterList = new List<char>();
+            _matchedWords.Clear();
+            foreach (var letter in tbChars.Text.Split(',')) 
             {
-                charString += letter;
-                charList.Add(letter[0]);
-                charCount++;
+                letterList.Add(char.Parse(letter));
             }
-
-            //filtering down dictionary to not kill computer
-            foreach (var word in _dictionary)
+            foreach (var letter in letterList.ToArray())
             {
-                if (word.Length<=charCount && charList.Contains(word[0]))
+                var tempList = letterList;
+                tempList.Remove(letter);
+                var charLeft = "";
+                foreach (var x in tempList)
                 {
-                    _dictionaryF.Add(word);
+                    charLeft += x;
                 }
-            }
-
-            Console.WriteLine(charString);
-
-            var results = new List<string>();
-
-            findWords(charString, "", results);
-
-            Console.WriteLine("finished recursion");
-
-            var validWords = new List<string>();
-
-            foreach (var anagram in results)
-            {
-                if (_dictionaryF.Contains(anagram) && validWords.Contains(anagram) == false)
+                var wordsBeginningList = new List<string>();
+                foreach (var word in _dictionary)
                 {
-                    validWords.Add(anagram);
+                    if (word.Length<=letterList.Count() && word.StartsWith(letter.ToString()))
+                    {
+                        wordsBeginningList.Add(word);
+                    }
                 }
+                filterWord(wordsBeginningList, charLeft, letter.ToString());
+
             }
-
-            Console.WriteLine("comparing done");
-
             lboxWords.DataSource = null;
-            lboxWords.DataSource = validWords;
+            lboxWords.DataSource = _matchedWords;
+            var timeEnd = DateTime.Now;
+            var timeTaken = timeEnd - timeStart;
+            lblTimeTaken.Text = $"Time taken: {timeTaken.TotalMilliseconds}";
         }
 
-        private void findWords(string charLeft, string prefix, IList<string> result)
+        public void filterWord(List<string> words, string charLeft, string prefix)
         {
             if (charLeft.Length == 0)
             {
-                result.Add(prefix);
+                _matchedWords.Add(prefix);
+            }
+            if (words.Count == 0)
+            {
                 return;
             }
-
-            for (int i = 0; i < charLeft.Length; i++)
+            else
             {
-                //setting first character as prefix
-                var tempPrefix = charLeft[i].ToString();
-                //making string of the rest of the letters
-                var tempCharLeft = charLeft.Substring(0, i) + charLeft.Substring(i + 1);
-                //new list to grab all anagram
-                var tempResult = new List<string>();
-                //recursion to iterate through all possible prefix
-                findWords(tempCharLeft, tempPrefix, tempResult);
-                foreach (var anagram in tempResult)
+                var charToAdd = charLeft.ToCharArray()[0];
+                prefix += charToAdd;
+                foreach (var word in words.ToArray())
                 {
-                    result.Add($"{prefix}{anagram}");
-                    Console.WriteLine(prefix + anagram);
+                    if (word == prefix)
+                    {
+                        _matchedWords.Add(word);
+                        words.Remove(word);
+                    }
+                    else if (word.StartsWith(prefix) == false)
+                    {
+                        words.Remove(word);
+                    }
                 }
+                charLeft = charLeft.Substring(1);
+                filterWord(words, charLeft, prefix);
             }
         }
     }
 }
+        
