@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanguageExt;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -32,7 +33,7 @@ namespace Anagram
         {
             var letters = tbChars.Text.ToCharArray();
 
-            var number = 1;
+            bigint number = 1;
 
             foreach (var letter in letters)
             {
