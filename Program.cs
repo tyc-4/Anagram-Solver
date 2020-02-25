@@ -16,7 +16,7 @@ namespace Anagram
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new formMain());
+            Application.Run(new formV2());
         }
     }
 }
