@@ -82,8 +82,35 @@ namespace Anagram
             _letterdictionary.Add('X', 101);
             _letterdictionary.Add('Y', 103);
             _letterdictionary.Add('Z', 107);
+
+            _letterdictionary.Add('a', 2);
+            _letterdictionary.Add('b', 3);
+            _letterdictionary.Add('c', 5);
+            _letterdictionary.Add('d', 7);
+            _letterdictionary.Add('e', 11);
+            _letterdictionary.Add('f', 13);
+            _letterdictionary.Add('g', 17);
+            _letterdictionary.Add('h', 19);
+            _letterdictionary.Add('i', 23);
+            _letterdictionary.Add('j', 29);
+            _letterdictionary.Add('k', 31);
+            _letterdictionary.Add('l', 37);
+            _letterdictionary.Add('m', 41);
+            _letterdictionary.Add('n', 43);
+            _letterdictionary.Add('o', 47);
+            _letterdictionary.Add('p', 53);
+            _letterdictionary.Add('q', 59);
+            _letterdictionary.Add('r', 61);
+            _letterdictionary.Add('s', 73);
+            _letterdictionary.Add('t', 79);
+            _letterdictionary.Add('u', 83);
+            _letterdictionary.Add('v', 89);
+            _letterdictionary.Add('w', 97);
+            _letterdictionary.Add('x', 101);
+            _letterdictionary.Add('y', 103);
+            _letterdictionary.Add('z', 107);
             //load all words into dictionary
-            var filePath = @"C:\Visual Studio Projects\Anagram\words_alpha.txt";
+            var filePath = @"C:\words_alpha.txt";
             StreamReader fileRead = new StreamReader(filePath);
             while (!fileRead.EndOfStream)
             {
@@ -93,7 +120,8 @@ namespace Anagram
 
                 foreach (var letter in wordC)
                 {
-                    _letterdictionary.TryGetValue(letter, out int prime);
+                    var prime = 1;
+                    _letterdictionary.TryGetValue(letter, out prime);
                     number = number * prime;
                 }
 
